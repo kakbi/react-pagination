@@ -351,4 +351,14 @@ const users = [
     },
 ];
 
-export const getUsers = () => users;
+export const getUsers = function (page, limit) {
+    let array = [];
+    for (let i = (page - 1) * limit; i < page * limit; i++) {
+        array.push(users[i]);
+    }
+    return array;
+};
+
+export const getLength = function () {
+    return users.length;
+};

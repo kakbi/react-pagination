@@ -2,6 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Table from './components/Table';
 import Pagination from './components/Pagination';
+import SelectLimit from './components/SelectLimit';
 import { getUsers, getLength } from './api/users';
 import { useState } from 'react';
 
@@ -32,13 +33,17 @@ function App() {
     return (
         <div className="container">
             <Table users={getUsers(page, limit)} />
-            <Pagination
-                totalPage={totalPage}
-                page={page}
-                limit={limit}
-                siblings={1}
-                onPageChange={handlePageChange}
-            />
+            <div className="pagination-container">
+                <SelectLimit onLimitChange={setLimit} />
+
+                <Pagination
+                    totalPage={totalPage}
+                    page={page}
+                    limit={limit}
+                    siblings={1}
+                    onPageChange={handlePageChange}
+                />
+            </div>
         </div>
     );
 }

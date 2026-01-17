@@ -11,6 +11,24 @@ function App() {
 
     let totalPage = Math.ceil(getLength() / limit);
 
+    function handlePageChange(value) {
+        if (value === '&laquo;' || value === '... ') {
+            setPage(1);
+        } else if (value === '&lsaquo;') {
+            if (page !== 1) {
+                setPage(page - 1);
+            }
+        } else if (value === '&rsaquo;') {
+            if (page !== totalPage) {
+                setPage(page + 1);
+            }
+        } else if (value === '&raquo;' || value === ' ...') {
+            setPage(totalPage);
+        } else {
+            setPage(value);
+        }
+    }
+
     return (
         <div className="container">
             <Table users={getUsers(page, limit)} />
@@ -19,6 +37,7 @@ function App() {
                 page={page}
                 limit={limit}
                 siblings={1}
+                onPageChange={handlePageChange}
             />
         </div>
     );

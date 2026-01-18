@@ -7,7 +7,7 @@ import { getUsers, getLength } from './api/users';
 import { useEffect, useState } from 'react';
 
 function App() {
-    const [page, setPage] = useState(4);
+    const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(5);
 
     let totalPage = Math.ceil(getLength() / limit);

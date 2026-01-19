@@ -4,20 +4,21 @@ import Table from './components/Table';
 import Pagination from './components/Pagination';
 import SelectLimit from './components/SelectLimit';
 import { getUsers, getLength } from './api/users';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function App() {
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(5);
 
     let totalPage = Math.ceil(getLength() / limit);
-    const pageNo = Math.min(page, totalPage);
+    let pageNo;
 
-    useEffect(() => {
-        if (page > totalPage) {
-            setPage(totalPage);
-        }
-    }, [limit, totalPage, page]);
+    if (page <= totalPage) {
+        pageNo = page;
+    } else {
+        setPage(totalPage);
+        pageNo = page;
+    }
 
     function handlePageChange(value) {
         if (value === '&laquo;' || value === '... ') {
